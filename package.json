@@ -1,0 +1,30 @@
+{
+  "name": "tooltip.js",
+  "version": "1.0.0",
+  "description": "Tooltips that just work",
+  "keywords": ["tool tip"],
+  "author": "Matthew Mueller <mattmuelle@gmai.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MatthewMueller/tooltip.js.git"
+  },
+  "dependencies": {
+    "adjust": "^2.0.3",
+    "component-classes": "^1.2.4",
+    "component-emitter": "^1.2.0",
+    "component-events": "^1.0.9",
+    "dom-css": "^1.1.2",
+    "domify": "^1.3.3",
+    "inserted": "0.0.4",
+    "load-styles": "^2.0.0",
+    "multiline": "^1.0.2",
+    "object-assign": "^4.0.1",
+    "sliced": "^1.0.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "roo": "^0.4.5",
+    "should": "*"
+  },
+  "main": "index"
+}

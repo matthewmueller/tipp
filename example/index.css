@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 60px;
+  font: 300 14px "Helvetica Neue", Helvetica, Arial;
+  min-height: 1000px;
+}
+a {
+  display: inline-block;
+  float: left;
+  border: 1px solid #eee;
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+  margin: 80px 15px;
+  width: 180px;
+  line-height: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.tooltip.simple {
+  background: blue;
+  border-color: blue;
+  padding: 200px;
+}
+
+#links {
+  min-width: 800px;
+}
+#big {
+  margin: 80px;
+  width: 80%;
+}
+#border {
+  border-width: 10px;
+}
+.hide-tip {
+  margin-left: 4em;
+}
+
+.tip-inner {
+
+}
