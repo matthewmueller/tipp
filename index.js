@@ -221,7 +221,7 @@ function Tipp(el, message, options) {
   if (this.options.class) {
     this.options.class.split(/\s+/).map(function(cls) {
       this.classes.add(cls)
-    })
+    }, this)
   }
 
   // add the message
