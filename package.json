@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "adjust": "^2.1.0",
+    "browserify-string-to-js": "^1.0.1",
     "component-classes": "^1.2.4",
     "component-events": "^1.0.9",
     "dom-css": "^1.1.2",
@@ -34,5 +35,10 @@
     "roo": "^0.4.5",
     "should": "*"
   },
-  "main": "dist/index.js"
+  "main": "index.js",
+  "browserify": {
+    "transform": [
+      "browserify-string-to-js"
+    ]
+  }
 }
