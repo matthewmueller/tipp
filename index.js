@@ -2,6 +2,7 @@
  * Module dependencies
  */
 
+var within_document = require('within-document')
 var classes = require('component-classes')
 var m = require('multiline').stripIndent
 var events = require('component-events')
@@ -218,7 +219,9 @@ function Tipp(el, message, options) {
   this.classes = classes(this.el)
 
   if (this.options.class) {
-    this.classes.add(this.options.class)
+    this.options.class.split(/\s+/).map(function(cls) {
+      this.classes.add(cls)
+    })
   }
 
   // add the message
@@ -228,7 +231,7 @@ function Tipp(el, message, options) {
 
   // bind if already in the DOM
   // otherwise wait until it's inserted
-  if (el.parentNode) {
+  if (within_document(el)) {
     this.bind()
   } else {
     inserted(el, this.bind.bind(this))

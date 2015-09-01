@@ -21,7 +21,8 @@
     "load-styles": "^2.0.0",
     "multiline": "^1.0.2",
     "object-assign": "^4.0.1",
-    "sliced": "^1.0.1"
+    "sliced": "^1.0.1",
+    "within-document": "0.0.3"
   },
   "devDependencies": {
     "mocha": "*",
