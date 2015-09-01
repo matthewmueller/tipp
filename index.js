@@ -4,7 +4,6 @@
 
 var within_document = require('within-document')
 var classes = require('component-classes')
-var m = require('multiline').stripIndent
 var events = require('component-events')
 var assign = require('object-assign')
 var inserted = require('inserted')
@@ -12,7 +11,6 @@ var style = require('load-styles')
 var adjust = require('adjust')()
 var domify = require('domify')
 var sliced = require('sliced')
-var css = require('dom-css')
 
 /**
  * Defaults
@@ -48,113 +46,13 @@ module.exports = tipp
  * Template
  */
 
-var template = domify(m(function() {/*
-  <div class="tipp-container tipp-hide">
-    <div class="tipp tipp-hide">
-      <div class="tipp-arrow"></div>
-      <div class="tipp-body"></div>
-    </div>
-  </div>
-*/}))
+var template = domify(require('./tipp.html'))
 
 /**
  * Insert tipp styling
  */
 
-style(m(function () {/*
-  .tipp {
-    font-size: 11px;
-    display: inline-block;
-    background-color: #000;
-    border-color: #000;
-    color: #fff;
-  }
-
-  .tipp-container.tipp-hide {
-    pointer-events: none;
-  }
-
-  .tipp.tipp-hide {
-    opacity: 0;
-  }
-
-  .tipp-body {
-    background-color: inherit;
-    color: inherit;
-    padding: 8px 10px 7px 10px;
-    text-align: center;
-  }
-
-  .tipp-arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    line-height: 0;
-    border-color: inherit;
-    border-style: dashed;
-    border-width: 5px;
-  }
-
-  .tipp-container[orientation~="top"] .tipp-arrow { border-top-color: inherit }
-  .tipp-container[orientation~="bottom"] .tipp-arrow { border-bottom-color: inherit }
-  .tipp-container[orientation~="left"] .tipp-arrow { border-left-color: inherit }
-  .tipp-container[orientation~="right"] .tipp-arrow { border-right-color: inherit }
-
-  .tipp-container[orientation~="bottom"][orientation~="center"] .tipp-arrow,
-  .tipp-container[orientation~="bottom"][orientation~="left"] .tipp-arrow,
-  .tipp-container[orientation~="bottom"][orientation~="right"] .tipp-arrow {
-    bottom: -5px;
-    left: 50%;
-    margin-left: -5px;
-    border-top-style: solid;
-    border-bottom: none;
-    border-left-color: transparent;
-    border-right-color: transparent
-  }
-
-  .tipp-container[orientation~="top"][orientation~="center"] .tipp-arrow,
-  .tipp-container[orientation~="top"][orientation~="left"] .tipp-arrow,
-  .tipp-container[orientation~="top"][orientation~="right"] .tipp-arrow {
-    top: -5px;
-    left: 50%;
-    margin-left: -5px;
-    border-bottom-style: solid;
-    border-top: none;
-    border-left-color: transparent;
-    border-right-color: transparent
-  }
-
-  .tipp-container[orientation~="right"][orientation~="middle"] .tipp-arrow {
-    right: -5px;
-    top: 50%;
-    margin-top: -5px;
-    border-left-style: solid;
-    border-right: none;
-    border-top-color: transparent;
-    border-bottom-color: transparent
-  }
-
-  .tipp-container[orientation~="left"][orientation~="middle"] .tipp-arrow {
-    left: -5px;
-    top: 50%;
-    margin-top: -5px;
-    border-right-style: solid;
-    border-left: none;
-    border-top-color: transparent;
-    border-bottom-color: transparent
-  }
-
-  .tipp-container[orientation~="top"][orientation~="right"] .tipp-arrow,
-  .tipp-container[orientation~="bottom"][orientation~="right"] .tipp-arrow {
-    left: 85%;
-  }
-
-
-  .tipp-container[orientation~="top"][orientation~="left"] .tipp-arrow,
-  .tipp-container[orientation~="bottom"][orientation~="left"] .tipp-arrow {
-    left: 15%;
-  }
-*/}))
+style(require('./tipp.css'))
 
 /**
  * Initialize a tipp

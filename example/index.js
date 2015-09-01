@@ -4,8 +4,7 @@
 
 var m = require('multiline').stripIndent
 var domify = require('domify')
-var tip = require('..')
-
+var tip = require('../dist/tipp.min.js')
 var html = domify(m(function() {/*
   <div id="links">
     <a href="#" title="top" id="top">Top</a>
