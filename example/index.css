@@ -21,10 +21,20 @@ a {
   position: relative;
 }
 
-.tooltip.simple {
+.tipp.simple {
   background: blue;
   border-color: blue;
-  padding: 200px;
+}
+
+.tipp-hide.tipp.simple {
+  transform: scale(0) translateX(-190px);
+  opacity: 0;
+}
+
+.tipp.simple {
+  transform: scale(1) translateX(0);
+  transition: 0.3s all linear;
+  opacity: 1;
 }
 
 #links {

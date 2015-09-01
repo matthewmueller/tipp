@@ -16,7 +16,7 @@ var html = domify(m(function() {/*
     <a href="#" title="top-right" id="top-right">Top Right</a>
     <a href="#" title="bottom-left" id="bottom-left">Bottom Left</a>
     <a href="#" title="bottom-right" id="bottom-right">Bottom Right</a>
-    <a href="#" tooltip="Hola mate!" tooltip-orientation="right" tooltip-class="simple" tooltip-offset="15 0">Hola</a>
+    <a href="#" tipp="Hola mate!" tipp-orientation="right" tipp-class="simple" tipp-offset="15 0">Hola</a>
   </div>
 */}))
 

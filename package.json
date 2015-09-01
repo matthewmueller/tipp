@@ -1,12 +1,12 @@
 {
-  "name": "tooltip.js",
+  "name": "tipp",
   "version": "1.0.0",
   "description": "Tooltips that just work",
   "keywords": ["tool tip"],
   "author": "Matthew Mueller <mattmuelle@gmai.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/MatthewMueller/tooltip.js.git"
+    "url": "git://github.com/MatthewMueller/tipp.git"
   },
   "dependencies": {
     "adjust": "^2.0.3",

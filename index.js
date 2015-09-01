@@ -38,29 +38,30 @@ var orientations = {
 }
 
 /**
- * Export `Tooltip`
+ * Export `tipp`
  */
 
-module.exports = tip
+module.exports = tipp
 
 /**
  * Template
  */
 
 var template = domify(m(function() {/*
-  <div class="tooltip tooltip-hide">
-    <div class="tooltip-arrow"></div>
-    <div class="tooltip-body"></div>
+  <div class="tipp-container tipp-hide">
+    <div class="tipp tipp-hide">
+      <div class="tipp-arrow"></div>
+      <div class="tipp-body"></div>
+    </div>
   </div>
 */}))
 
 /**
- * Insert tooltip styling
+ * Insert tipp styling
  */
 
 style(m(function () {/*
-  .tooltip {
-    position: absolute;
+  .tipp {
     font-size: 11px;
     display: inline-block;
     background-color: #000;
@@ -68,14 +69,22 @@ style(m(function () {/*
     color: #fff;
   }
 
-  .tooltip-body {
+  .tipp-container.tipp-hide {
+    pointer-events: none;
+  }
+
+  .tipp.tipp-hide {
+    opacity: 0;
+  }
+
+  .tipp-body {
     background-color: inherit;
     color: inherit;
     padding: 8px 10px 7px 10px;
     text-align: center;
   }
 
-  .tooltip-arrow {
+  .tipp-arrow {
     position: absolute;
     width: 0;
     height: 0;
@@ -85,14 +94,14 @@ style(m(function () {/*
     border-width: 5px;
   }
 
-  .tooltip[orientation~="top"] .tooltip-arrow { border-top-color: inherit }
-  .tooltip[orientation~="bottom"] .tooltip-arrow { border-bottom-color: inherit }
-  .tooltip[orientation~="left"] .tooltip-arrow { border-left-color: inherit }
-  .tooltip[orientation~="right"] .tooltip-arrow { border-right-color: inherit }
+  .tipp-container[orientation~="top"] .tipp-arrow { border-top-color: inherit }
+  .tipp-container[orientation~="bottom"] .tipp-arrow { border-bottom-color: inherit }
+  .tipp-container[orientation~="left"] .tipp-arrow { border-left-color: inherit }
+  .tipp-container[orientation~="right"] .tipp-arrow { border-right-color: inherit }
 
-  .tooltip[orientation~="bottom"][orientation~="center"] .tooltip-arrow,
-  .tooltip[orientation~="bottom"][orientation~="left"] .tooltip-arrow,
-  .tooltip[orientation~="bottom"][orientation~="right"] .tooltip-arrow {
+  .tipp-container[orientation~="bottom"][orientation~="center"] .tipp-arrow,
+  .tipp-container[orientation~="bottom"][orientation~="left"] .tipp-arrow,
+  .tipp-container[orientation~="bottom"][orientation~="right"] .tipp-arrow {
     bottom: -5px;
     left: 50%;
     margin-left: -5px;
@@ -102,9 +111,9 @@ style(m(function () {/*
     border-right-color: transparent
   }
 
-  .tooltip[orientation~="top"][orientation~="center"] .tooltip-arrow,
-  .tooltip[orientation~="top"][orientation~="left"] .tooltip-arrow,
-  .tooltip[orientation~="top"][orientation~="right"] .tooltip-arrow {
+  .tipp-container[orientation~="top"][orientation~="center"] .tipp-arrow,
+  .tipp-container[orientation~="top"][orientation~="left"] .tipp-arrow,
+  .tipp-container[orientation~="top"][orientation~="right"] .tipp-arrow {
     top: -5px;
     left: 50%;
     margin-left: -5px;
@@ -114,7 +123,7 @@ style(m(function () {/*
     border-right-color: transparent
   }
 
-  .tooltip[orientation~="right"][orientation~="middle"] .tooltip-arrow {
+  .tipp-container[orientation~="right"][orientation~="middle"] .tipp-arrow {
     right: -5px;
     top: 50%;
     margin-top: -5px;
@@ -124,7 +133,7 @@ style(m(function () {/*
     border-bottom-color: transparent
   }
 
-  .tooltip[orientation~="left"][orientation~="middle"] .tooltip-arrow {
+  .tipp-container[orientation~="left"][orientation~="middle"] .tipp-arrow {
     left: -5px;
     top: 50%;
     margin-top: -5px;
@@ -134,57 +143,52 @@ style(m(function () {/*
     border-bottom-color: transparent
   }
 
-  .tooltip[orientation~="top"][orientation~="right"] .tooltip-arrow,
-  .tooltip[orientation~="bottom"][orientation~="right"] .tooltip-arrow {
+  .tipp-container[orientation~="top"][orientation~="right"] .tipp-arrow,
+  .tipp-container[orientation~="bottom"][orientation~="right"] .tipp-arrow {
     left: 85%;
   }
 
 
-  .tooltip[orientation~="top"][orientation~="left"] .tooltip-arrow,
-  .tooltip[orientation~="bottom"][orientation~="left"] .tooltip-arrow {
+  .tipp-container[orientation~="top"][orientation~="left"] .tipp-arrow,
+  .tipp-container[orientation~="bottom"][orientation~="left"] .tipp-arrow {
     left: 15%;
-  }
-
-  .tooltip-hide {
-    pointer-events: none;
-    opacity: 0;
   }
 */}))
 
 /**
- * Initialize a tooltip
+ * Initialize a tipp
  *
  * @param {Element} el
  * @param {String} message
  * @param {Object} options
- * @return {Tip|Array}
+ * @return {Tipp|Array}
  */
 
-function tip(el, message, options) {
+function tipp(el, message, options) {
   if (!arguments.length || typeof el === 'string') {
-    var els = sliced(document.querySelectorAll(el || '[tooltip]'));
+    var els = sliced(document.querySelectorAll(el || '[tipp]'));
     return els.map(function(el) {
-      var msg = message || el.getAttribute('tooltip')
+      var msg = message || el.getAttribute('tipp')
       var offset = undefined
 
-      if (el.hasAttribute('tooltip-offset')) {
-        var op = el.getAttribute('tooltip-offset').split(/\s+/)
+      if (el.hasAttribute('tipp-offset')) {
+        var op = el.getAttribute('tipp-offset').split(/\s+/)
         offset = { x: Number(op[0]), y: Number(op[1]) }
       }
 
-      return new Tip(el, msg, {
-        orientation: el.getAttribute('tooltip-orientation'),
-        class: el.getAttribute('tooltip-class'),
+      return new Tipp(el, msg, {
+        orientation: el.getAttribute('tipp-orientation'),
+        class: el.getAttribute('tipp-class'),
         offset: offset
       })
     })
   } else {
-    return new Tip(el, message, options)
+    return new Tipp(el, message, options)
   }
 }
 
 /**
- * Initialize a `Tip` with the given `content`.
+ * Initialize a `Tipp` with the given `content`.
  *
  * @param {Element} el
  * @param {Mixed} message
@@ -192,8 +196,8 @@ function tip(el, message, options) {
  * @api public
  */
 
-function Tip(el, message, options) {
-  if (!(this instanceof Tip)) return new Tip(el, message, options)
+function Tipp(el, message, options) {
+  if (!(this instanceof Tipp)) return new Tipp(el, message, options)
   options = options || {}
 
   if (typeof message === 'object') {
@@ -207,8 +211,10 @@ function Tip(el, message, options) {
     : options.offset
 
   this.host = el
-  this.el = template.cloneNode(true)
-  this.inner = this.el.querySelector('.tooltip-body')
+  this.container = template.cloneNode(true)
+  this.el = this.container.querySelector('.tipp')
+  this.inner = this.el.querySelector('.tipp-body')
+  this.container_classes = classes(this.container)
   this.classes = classes(this.el)
 
   if (this.options.class) {
@@ -217,7 +223,7 @@ function Tip(el, message, options) {
 
   // add the message
   message = message || el.getAttribute('title')
-  if (!message) throw new Error('tooltip doesn\'t have any content')
+  if (!message) throw new Error('tipp doesn\'t have any content')
   this.message(message)
 
   // bind if already in the DOM
@@ -232,17 +238,17 @@ function Tip(el, message, options) {
 /**
  * Bind the events
  *
- * @return {Tip}
+ * @return {Tipp}
  */
 
-Tip.prototype.bind = function () {
-  document.body.appendChild(this.el)
+Tipp.prototype.bind = function () {
+  document.body.appendChild(this.container)
 
   this.events = events(this.host, this)
   this.events.bind('mouseenter', 'show')
   this.events.bind('mouseleave', 'maybeHide')
 
-  this.tip_events = events(this.el, this)
+  this.tip_events = events(this.container, this)
   this.tip_events.bind('mouseenter', 'cancelHide')
   this.tip_events.bind('mouseleave', 'maybeHide')
 
@@ -256,11 +262,11 @@ Tip.prototype.bind = function () {
  * Set tip `content`.
  *
  * @param {String|Element} content
- * @return {Tip} self
+ * @return {Tipp} self
  * @api public
  */
 
-Tip.prototype.message = function(content){
+Tipp.prototype.message = function(content){
   if ('string' == typeof content) content = domify(content)
   this.inner.appendChild(content)
   return this
@@ -269,10 +275,10 @@ Tip.prototype.message = function(content){
 /**
  * Maybe hide
  *
- * @return {Tip}
+ * @return {Tipp}
  */
 
-Tip.prototype.maybeHide = function() {
+Tipp.prototype.maybeHide = function() {
   var self = this
   var delay = this.options.delay
 
@@ -286,35 +292,37 @@ Tip.prototype.maybeHide = function() {
 }
 
 /**
- * Hide the tooltip
+ * Hide the tipp
  *
- * @return {Tip}
+ * @return {Tipp}
  */
 
-Tip.prototype.hide = function() {
-  this.classes.add('tooltip-hide')
+Tipp.prototype.hide = function() {
+  this.container_classes.add('tipp-hide')
+  this.classes.add('tipp-hide')
   return this
 }
 
 /**
  * Cancel the hiding
  *
- * @return {Tip}
+ * @return {Tipp}
  */
 
-Tip.prototype.cancelHide = function() {
+Tipp.prototype.cancelHide = function() {
   this.hiding = false
   return this
 }
 
 /**
- * Show a tooltip
+ * Show a tipp
  *
- * @return {Tip}
+ * @return {Tipp}
  */
 
-Tip.prototype.show = function() {
-  this.classes.remove('tooltip-hide')
+Tipp.prototype.show = function() {
+  this.container_classes.remove('tipp-hide')
+  this.classes.remove('tipp-hide')
   this.hiding = false
   return this
 }
@@ -322,11 +330,11 @@ Tip.prototype.show = function() {
 /**
  * Set the orientation
  *
- * @return {Tip}
+ * @return {Tipp}
  */
 
-Tip.prototype.orientation = function() {
-  this.adjust = adjust(this.el, this.host, {
+Tipp.prototype.orientation = function() {
+  this.adjust = adjust(this.container, this.host, {
     target: this.options.orientation,
     offset: this.options.offset
   })
