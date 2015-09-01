@@ -6,10 +6,11 @@
 ## Features
 
 - No jQuery
-- Easily Customizeable
+- No CSS to include
+- Infinitely Customizeable
 - Performant
 - Auto-repositioning
-- Various orientations
+- Orientations (top left, bottom, right)
 
 ## Installation
 
