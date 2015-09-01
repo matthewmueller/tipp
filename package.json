@@ -11,7 +11,7 @@
     "url": "git://github.com/MatthewMueller/tipp.git"
   },
   "dependencies": {
-    "adjust": "^2.0.3",
+    "adjust": "^2.1.0",
     "component-classes": "^1.2.4",
     "component-emitter": "^1.2.0",
     "component-events": "^1.0.9",
