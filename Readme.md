@@ -7,7 +7,7 @@
 
 - No jQuery
 - No CSS to include
-- Infinitely Customizeable
+- Infinitely Customizable
 - Performant
 - Auto-repositioning
 - Orientations (top left, bottom, right)
